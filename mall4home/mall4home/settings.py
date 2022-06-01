@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'mall4home.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': BASE_DIR / 'mall4home',
-        'USER' : 'root',
-        'PASSWORD' : 'admnft',
-        'HOST' : 'localhost',
+        'NAME': 'mall4home',
+        'USER': 'root',
+        'PASSWORD': 'nftadm',
+        'HOST': 'localhost',
     }
 }
 
