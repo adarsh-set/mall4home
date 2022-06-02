@@ -38,12 +38,12 @@
 
 <body bgcolor="#e83e8c">
     <center>
-        <form action="subreg/" method="get">
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
             <div class="loginbox">
                 <p>
                     <font color="red">{{lnge}}</font>
                 </p>
-
                 <h2>Register</h2>
                 <input type="text" placeholder="Username" name="uname"><br><br>
                 <input type="text" placeholder="Firstname" name="fname"><br><br>

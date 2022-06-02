@@ -22,24 +22,30 @@ def log(request):
     else:    
         return render(request,'login.html')
 def reg(request):
-    print("re :",request)
-    return render(request,'register.html')
-def subreg(request):
-    userw= request.GET['uname']
-    f_name= request.GET['fname']
-    l_name= request.GET['lname']
-    emai= request.GET['email']
-    pa_wo= request.GET['p_w']
-    repa_wo= request.GET['re-p_w']
-    if userw != '' and emai != '' and pa_wo != '':
-        if User.objects.filter(username = userw).exists() or User.objects.filter(email = emai).exists():
-            msg="user name or email already taken"
-            return render(request,'register.html',{"lnge": msg})
+    if request.method == "POST":
+        userw= request.POST['uname']
+        f_name= request.POST['fname']
+        l_name= request.POST['lname']
+        emai= request.POST['email']
+        pa_wo= request.POST['p_w']
+        repa_wo= request.POST['re-p_w']
+        if userw != '' and emai != '' and pa_wo != '':
+            if User.objects.filter(username = userw).exists() or User.objects.filter(email = emai).exists():
+                msg="user name or email already taken"
+                return render(request,'register.html',{"lnge": msg})
+            elif pa_wo != repa_wo:
+                msg="re-password not same"
+                return render(request,'register.html',{"lnge": msg})
+            else:
+                user = User.objects.create_user(username = userw,first_name = f_name,last_name = l_name,email = emai,password = pa_wo)
+                user.save();
+                auth.login(request,user)
+                return redirect('/')
         else:
-            return redirect(request,'/')
-    else:
-        msg="invalid"
-        return render(request,'register.html',{"lnge": msg})
+            msg="invalid"
+            return render(request,'register.html',{"lnge": msg})
+    else:    
+        return render(request,'register.html')
 def logout(request):
     auth.logout(request)
     return redirect('/')
