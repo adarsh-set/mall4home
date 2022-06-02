@@ -7,6 +7,5 @@ urlpatterns = [
    path('login1/',views.log,name='loginpage'),
    path('reg/',views.reg,name='register'),
    path('reg/subreg/',views.subreg),
-   #path('login/',views.)
    path('logout/',views.logout)
 ]
