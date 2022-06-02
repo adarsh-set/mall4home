@@ -38,16 +38,19 @@
 
 <body bgcolor="#e83e8c">
     <center>
-        <form action="subreg/">
+        <form action="subreg/" method="get">
             <div class="loginbox">
+                <p>
+                    <font color="red">{{lnge}}</font>
+                </p>
 
                 <h2>Register</h2>
-                <input type="text" placeholder="Username" name="uname" required><br><br>
+                <input type="text" placeholder="Username" name="uname"><br><br>
                 <input type="text" placeholder="Firstname" name="fname"><br><br>
                 <input type="text" placeholder="Lastname" name="lname"><br><br>
-                <input type="email" placeholder="email" name="email" required><br><br>
-                <input type="password" placeholder="password" name="p_w" required><br><br>
-                <input type="password" placeholder="Re-password" name="re-p_w" required><br><br>
+                <input type="email" placeholder="email" name="email"><br><br>
+                <input type="password" placeholder="password" name="p_w"><br><br>
+                <input type="password" placeholder="Re-password" name="re-p_w"><br><br>
                 <button type="submit">submit</button>
 
             </div>

@@ -38,7 +38,8 @@
 
 <body bgcolor="#e83e8c">
     <center>
-        <form action='sublog/'>
+        <form action="{% url 'loginpage' %}" method="post">
+            {% csrf_token %}
             <div class="loginbox">
                 <p>
                     <font color="red">{{lng}}</font>
