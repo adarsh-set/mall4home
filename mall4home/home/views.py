@@ -3,7 +3,6 @@ from queue import Empty
 from django.contrib.auth.models import auth,User
 from django.http import request
 from django.shortcuts import render,redirect
-
 # Create your views here.
 def index(request):
     return render(request,'index.html')
