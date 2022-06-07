@@ -3,9 +3,17 @@ from queue import Empty
 from django.contrib.auth.models import auth,User
 from django.http import request
 from django.shortcuts import render,redirect
+from product.models import pro_store
 # Create your views here.
+
+
 def index(request):
-    return render(request,'index.html')
+    pro = pro_store.objects.all()
+    print("product : ",pro)
+    
+    return render(request,'index.html',{"pro": pro})
+
+
 def log(request):
     if request.method == "POST":
         user= request.POST['uname']
@@ -20,6 +28,8 @@ def log(request):
             return render(request,'login.html',{"lng": msg})
     else:    
         return render(request,'login.html')
+
+
 def reg(request):
     if request.method == "POST":
         userw= request.POST['uname']
@@ -45,6 +55,8 @@ def reg(request):
             return render(request,'register.html',{"lnge": msg})
     else:    
         return render(request,'register.html')
+
+
 def logout(request):
     auth.logout(request)
     return redirect('/')

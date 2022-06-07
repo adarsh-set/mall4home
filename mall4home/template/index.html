@@ -284,21 +284,21 @@
         </div>
         <div class="container layout_padding">
             <div class="product_container">
-                {% for data in 'admnft' %}
-                <a href="">
+                {% for data in pro %}
+                <a href="product?id={{data.id}}">
                     <div class="product_box">
                         <div class="product_img-box">
-                            <img src="{% static 'images/p2.png' %}" alt="" />
+                            <img src="{{data.p_image.url}}" alt="" />
                             <span>
                 Sale
               </span>
                         </div>
                         <div class="product_detail-box">
                             <span>
-                $110.00
+                                ₹{{data.p_price}}
               </span>
                             <p>
-                                Passage of Lorem Ipsum, you
+                                {{data.p_name}}
                             </p>
                         </div>
                     </div>
