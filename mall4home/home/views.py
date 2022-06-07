@@ -3,7 +3,7 @@ from queue import Empty
 from django.contrib.auth.models import auth,User
 from django.http import request
 from django.shortcuts import render,redirect
-from product.models import pro_store
+from product2.models import pro_store2
 # Create your views here.
 
 
