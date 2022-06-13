@@ -69,6 +69,8 @@
             color: white;
             margin-top: 10px;
         }
+        
+        .comment-box h2 {}
     </style>
 </head>
 
@@ -165,22 +167,23 @@
             </div>
             <h3>Comment</h3>
             <div class="comment-box">
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b><br> adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
-                <p><b>Welldone </b> <br>adarsh <small>06-03-2022</small></p>
+                {% if not uid.comments.all %}
+                <h2>Not any comment</h2>
+                {% else %} {% for data in uid.comments.all %}
+                <p><b>{{data.body}} </b> <br>{{data.u_name}} <small>{{data.date}}</small></p>
+                {% endfor %} {% endif %}
+
             </div>
+            {% if user.is_authenticated %}
             <div class="comment-input">
-                <textarea></textarea><br>
-                <button>submit</button>
+                <form action="comment/">
+                    <textarea name="cmt"></textarea><br>
+                    <input type="hidden" name="user" value="{{user.username}}">
+                    <input type="hidden" name="pro" value="{{uid.id}}">
+                    <button>submit</button>
+                </form>
             </div>
+            {% endif %}
     </section>
 
     <!-- end products section -->

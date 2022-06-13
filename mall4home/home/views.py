@@ -59,4 +59,6 @@ def reg(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    return redirect("/")    
+    
+
