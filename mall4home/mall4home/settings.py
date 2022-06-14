@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from http import client
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -84,6 +85,23 @@ DATABASES = {
         'HOST': 'localhost',
     }
 }
+
+# cacheing filed
+
+CACHE_TTL=60 * 1500
+CACHE ={
+    "default":{
+       "BACKEND" : "django_redis.cash.RedisCashe",
+       "LOCATION" : "radis://127.0.0.1:6379/1",
+       "OPTIONS" : {
+           "CLIENT_CLASS" : "django_redis.client.DefaultClient",
+           },
+       "KEY_PERFIX" : "example",
+    }
+}
+
+
+
 
 
 # Password validation
