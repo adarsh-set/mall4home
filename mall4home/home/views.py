@@ -2,17 +2,19 @@ import email
 from queue import Empty
 from django.contrib.auth.models import auth,User
 from django.http import request
+from product.models import pro_store
 from django.shortcuts import render,redirect
-from product2.models import pro_store2
 # Create your views here.
 
 
 def index(request):
     pro = pro_store.objects.all()
     print("product : ",pro)
-    
-    return render(request,'index.html',{"pro": pro})
-
+    if 'firname' in request.COOKIES:
+        sam = request.COOKIES['firname']
+        return render(request,'index.html',{"pro": pro,'em':sam})
+    else:
+        return render(request,'index.html',{"pro": pro})
 
 def log(request):
     if request.method == "POST":
@@ -22,7 +24,13 @@ def log(request):
     
         if valid is not None:
             auth.login(request,valid)
-            return redirect('/')
+            fistname=User.objects.get(username=user)
+            re_dir=redirect('/')
+            '''cookies'''
+            re_dir.set_cookie('firname',fistname.first_name)
+            re_dir.set_cookie('valid',True)
+            return re_dir
+        
         else:
             msg="invalid username and password"
             return render(request,'login.html',{"lng": msg})
@@ -59,4 +67,10 @@ def reg(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    #cookie delete
+    ret = redirect("/")   
+    ret.delete_cookie('firname') 
+    ret.delete_cookie('valid') 
+    return ret
+    
+
