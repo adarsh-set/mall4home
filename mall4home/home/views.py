@@ -10,6 +10,7 @@ from django.shortcuts import render,redirect
 def index(request):
     pro = pro_store.objects.all()
     print("product : ",pro)
+    # cookie getting
     if 'firname' in request.COOKIES:
         sam = request.COOKIES['firname']
         return render(request,'index.html',{"pro": pro,'em':sam})
@@ -25,8 +26,8 @@ def log(request):
         if valid is not None:
             auth.login(request,valid)
             fistname=User.objects.get(username=user)
+            # cookie fetching
             re_dir=redirect('/')
-            '''cookies'''
             re_dir.set_cookie('firname',fistname.first_name)
             re_dir.set_cookie('valid',True)
             return re_dir
@@ -68,9 +69,9 @@ def reg(request):
 def logout(request):
     auth.logout(request)
     #cookie delete
-    ret = redirect("/")   
-    ret.delete_cookie('firname') 
-    ret.delete_cookie('valid') 
-    return ret
+    cook_del = redirect("/")   
+    cook_del.delete_cookie('firname') 
+    cook_del.delete_cookie('valid') 
+    return cook_del
     
 

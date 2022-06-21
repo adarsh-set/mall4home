@@ -19,6 +19,28 @@ def proindex(request):
     return render(request,'product.html',{'uid':pro_var})
 
 
+#session creating
+
+def proindex2(request):
+    pro_id=request.GET['id']
+    pro_var = pro_store.objects.get(id = pro_id)
+    if 'priortiy_sess' in request.session:
+        if pro_id in request.session['priortiy_sess']:
+            request.session['priortiy_sess'].remove(pro_id)
+        sess_pro = pro_store.objects.filter(id__in=request.session['priortiy_sess'])
+        #pro_sort=sorted(sess_pro,key=lambda x: request.session['priortiy_sess'].index(x.id))
+        print("sess store",sess_pro)
+        
+        request.session['priortiy_sess'].insert(0,pro_id)
+        if len(request.session['priortiy_sess']) >  4 :
+            request.session['priortiy_sess'].pop()
+        print(request.session['priortiy_sess'])
+    else:
+        request.session['priortiy_sess'] = [pro_id] 
+        sess_pro = pro_store.objects.filter(id = pro_id)
+    request.session.modified = True
+    return render(request,'product.html',{'uid':pro_var,'s_pr':sess_pro})
+    
 def comm(request):
     user=request.GET['user']
     pro=request.GET['pro']

@@ -3,6 +3,6 @@ from product import views
 
 
 urlpatterns = [
-    path('', views.proindex),
+    path('', views.proindex2),
     path('comment/',views.comm),
 ]

@@ -69,6 +69,11 @@
             color: white;
             margin-top: 10px;
         }
+        
+        .session img {
+            border: 2px solid black;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -160,7 +165,10 @@
 
                 </div>
 
-
+            </div>
+            <div class="session">
+                {% for i in s_pr %}
+                <img style="max-width: 100px; height:auto" src={{i.p_image.url}} alt="" /> {% endfor %}
 
             </div>
             <h3>Comment</h3>
