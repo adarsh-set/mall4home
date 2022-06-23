@@ -14,3 +14,5 @@ class pro_store(models.Model):
     def __str__(self):
         return self.p_name
     
+    class Meta():
+        ordering = ("-date",)

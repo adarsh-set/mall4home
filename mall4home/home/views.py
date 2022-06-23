@@ -100,3 +100,6 @@ def sera(request):
             ali.append(i.p_name)
         return JsonResponse(ali,safe=False)
     return redirect("/")
+ 
+ 
+ 
