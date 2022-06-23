@@ -1,21 +1,36 @@
 import email
 from queue import Empty
+from unicodedata import name
 from django.contrib.auth.models import auth,User
 from django.http import request
 from product.models import pro_store
 from django.shortcuts import render,redirect
+# json import
+from django.http.response import JsonResponse
+from django.db.models.query_utils import Q
 # Create your views here.
 
 
 def index(request):
     pro = pro_store.objects.all()
-    print("product : ",pro)
-    # cookie getting
-    if 'firname' in request.COOKIES:
-        sam = request.COOKIES['firname']
-        return render(request,'index.html',{"pro": pro,'em':sam})
+    if request.method == "POST":
+        se_el = request.POST['na']
+        pro=pro_store.objects.filter(Q(p_name__istartswith=se_el))
+        print(pro)
+        if pro :
+            return render(request,'index.html',{"pro": pro})
+        else:
+            pr="Sorry Not in Store"
+            return render(request,'index.html',{"pr": pr})
+    
     else:
-        return render(request,'index.html',{"pro": pro})
+        print("product : ",pro)
+        # cookie getting
+        if 'firname' in request.COOKIES:
+            sam = request.COOKIES['firname']
+            return render(request,'index.html',{"pro": pro,'em':sam})
+        else:
+            return render(request,'index.html',{"pro": pro})
 
 def log(request):
     if request.method == "POST":
@@ -75,3 +90,13 @@ def logout(request):
     return cook_del
     
 
+def sera(request):
+    if 'term' in request.GET:
+        s_e = request.GET['term']
+        print(s_e)
+        ob_s = pro_store.objects.filter(Q(p_name__istartswith=s_e))
+        ali=[]
+        for i in ob_s:
+            ali.append(i.p_name)
+        return JsonResponse(ali,safe=False)
+    return redirect("/")

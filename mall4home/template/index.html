@@ -24,6 +24,27 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <!-- responsive style -->
     <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+    <style>
+        .serh {
+            border-radius: 15px;
+            border-color: blue;
+            padding: 10px;
+        }
+        
+        .but {
+            border-radius: 10px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-style: italic;
+            background-color: pink;
+            color: black;
+            margin-left: 20px;
+        }
+        
+        .emp {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -282,8 +303,18 @@
                 Featured Product Just Arrived
             </p>
         </div>
+        <div>
+            <center>
+                <form action="{% url 'homepage' %}" method="post">
+                    {% csrf_token %}
+                    <input class="serh" type="text" id="search" name="na">
+                    <button class="but" type="submit">Search</button>
+                </form>
+            </center>
+        </div>
         <div class="container layout_padding">
             <div class="product_container">
+                <h2 class="emp">🤷‍♀️ {{pr}}</h2>
                 {% for data in pro %}
                 <a href="product?id={{data.id}}">
                     <div class="product_box">
@@ -769,6 +800,19 @@
             document.getElementById("myNav").style.width = "0%";
         }
     </script>
+    <script>
+        $(function() {
+            $("#search").autocomplete({
+                source:
+
+                    "{% url 'ser' %}"
+
+
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 
 </html>
