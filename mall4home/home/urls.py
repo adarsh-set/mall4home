@@ -10,6 +10,6 @@ urlpatterns = [
    path('search/',views.sera,name="ser"),
    # Feed
    path('feed/',pro_feed(),name="feed"),
-   
+   path('mail2/',views.sam),
    
 ]

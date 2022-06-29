@@ -314,7 +314,7 @@
         </div>
         <div class="container layout_padding">
             <div class="product_container">
-                <h2 class="emp">🤷‍♀️ {{pr}}</h2>
+                <h2 class="emp"> {{pr}}</h2>
                 {% for data in pro %}
                 <a href="product?id={{data.id}}">
                     <div class="product_box">
@@ -566,8 +566,8 @@
                     </p>
                 </div>
                 <div class="col-md-7">
-                    <form action="">
-                        <input type="email" placeholder="Enter your email" />
+                    <form action="mail2/">
+                        <input type="text" placeholder="Enter your Message" name="em" />
                         <button>
               Sign Up
             </button>

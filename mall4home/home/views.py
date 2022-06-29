@@ -1,13 +1,13 @@
-import email
-from queue import Empty
-from unicodedata import name
+
 from django.contrib.auth.models import auth,User
-from django.http import request
 from product.models import pro_store
 from django.shortcuts import render,redirect
 # json import
 from django.http.response import JsonResponse
 from django.db.models.query_utils import Q
+#mail import
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -20,7 +20,7 @@ def index(request):
         if pro :
             return render(request,'index.html',{"pro": pro})
         else:
-            pr="Sorry Not in Store"
+            pr="🤷‍♀️ Sorry Not in Store"
             return render(request,'index.html',{"pr": pr})
     
     else:
@@ -102,4 +102,13 @@ def sera(request):
     return redirect("/")
  
  
- 
+def sam(request):
+    mai = request.GET['em']
+    
+    emai_from = settings.EMAIL_HOST_USER 
+    emai_to = ['websrj123@gmail.com',]
+    msg = "hellow"
+    subject ="tested mail"
+    send_mail(subject,msg,emai_from,emai_to)
+    
+    return render(request,'web(djano 1st).html')
